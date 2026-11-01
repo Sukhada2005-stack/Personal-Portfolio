@@ -286,10 +286,15 @@ nav ul {
     width: 100%;
 }
 
+.photo{
+   width: min(340px, 80vw);
+   filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.3));
+}
 .myImage {
-    width: 300px;
+    display: block;
+    width: 100%;
+    height: auto;
     border-radius: 10px;
-    filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.3));
 }
 
 .about-text {
@@ -301,7 +306,12 @@ nav ul {
 .info {
     font-size: 1.1rem;
     line-height: 1.8;
-    text-align: justify;
+    text-align: left;
+     margin: 0 0 1.25rem;
+}
+ 
+.info:last-child{
+    margin-bottom: 0;
 }
 
 /* =========================================
