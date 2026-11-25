@@ -11,7 +11,7 @@ dotenv.config();
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const __filename = path.join(__dirname, "public", "Sukhada_Bhalerao_CE.pdf");
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -48,7 +48,7 @@ app.post("/send", async (req, res) => {
   });
   const mailobject = {
     from: email,
-    to: "sukhadabhalerao2005@gmail.com",
+    to: process.env.USER_EMAIL,
     subject: Subject,
     text:
       "Message from " +
@@ -109,3 +109,6 @@ app.get("/projects", async (req, res) => {
 app.listen(port, () => {
   console.log("The server is listening on port " + port);
 });
+
+
+export default app;
