@@ -10,12 +10,12 @@ import fs from "node:fs/promises";
 
 dotenv.config();
 // updations in the download path 
-// const __dirname = dirname(fileURLToPath(import.meta.url));
+const __dirname = dirname(fileURLToPath(import.meta.url));
 // const __filename = path.join(__dirname, "public", "Sukhada_Bhalerao_CE.pdf");
 const app = express();
 const port = process.env.PORT || 3000;
 
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "public")));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
