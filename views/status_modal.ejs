@@ -38,7 +38,7 @@
             /*40dvh*/
             border-radius: 10px;
             background-color: #ffffff;
-            border: 0.5px solid rgba(204, 204, 204 , 0.5);
+            border: 0.5px solid rgba(204, 204, 204, 0.5);
             box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
         }
 
@@ -81,12 +81,15 @@
         #button1:active {
             background-color: #44bb89;
         }
-        #button2{
-            background-color:#fa3f3f;
+
+        #button2 {
+            background-color: #fa3f3f;
         }
-        #button2:active{
-            background-color:#FF2C2C;
+
+        #button2:active {
+            background-color: #FF2C2C;
         }
+
         .status-modal form {
             display: flex;
             justify-content: center;
@@ -105,11 +108,11 @@
                 <%- content.subText %>
             </p>
             <% if(content.errorStatus===false){ %>
-                <form action="/" method="get">
+                <form action=<%= content.route %> method="get">
                     <button type="submit" id="button1">Back To Homepage</button>
                 </form>
                 <% }else{ %>
-                    <form action="/contact" method="get">
+                    <form action=<%= content.route %> method="get">
                         <button type="submit" id="button2">Try Again</button>
                     </form>
                     <% } %>

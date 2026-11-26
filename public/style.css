@@ -286,10 +286,11 @@ nav ul {
     width: 100%;
 }
 
-.photo{
-   width: min(340px, 80vw);
-   filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.3));
+.photo {
+    width: min(340px, 80vw);
+    filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.3));
 }
+
 .myImage {
     display: block;
     width: 100%;
@@ -307,10 +308,10 @@ nav ul {
     font-size: 1.1rem;
     line-height: 1.8;
     text-align: left;
-     margin: 0 0 1.25rem;
+    margin: 0 0 1.25rem;
 }
- 
-.info:last-child{
+
+.info:last-child {
     margin-bottom: 0;
 }
 
@@ -462,13 +463,13 @@ nav ul {
 }
 
 /* Form Styling */
-.contact-form {
+#contact-form {
     background-color: white;
     color: #052547;
     padding: 50px 5%;
 }
 
-.contact-form form {
+#contact-form form {
     max-width: 800px;
     margin: 0 auto;
 }
@@ -751,7 +752,7 @@ textarea {
 .tech-stack div:hover {
     border: 0.5px solid #ffb454;
     color: #ffb454;
-    
+
 }
 
 .controls {
@@ -805,10 +806,10 @@ textarea {
 
 
 /* Footer */
-.container1{
-    height:60px;
-    width:100%;
+.container1 {
+    height: 60px;
+    width: 100%;
     display: flex;
     justify-content: flex-end;
-    gap:15px;
+    gap: 15px;
 }
