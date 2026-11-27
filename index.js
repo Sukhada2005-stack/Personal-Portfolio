@@ -4,7 +4,7 @@ import { url } from "inspector";
 import bodyParser from "body-parser";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
-import nodemailer from "nodemailer";
+// import nodemailer from "nodemailer";
 import dotenv from "dotenv";
 import fs from "node:fs/promises";
 
@@ -63,29 +63,6 @@ app.get("/download", async (req, res) => {
 //fetching the data from the contact form.
 app.post("/send", async (req, res) => {
   const { fname, lname, email, Subject, message } = req.body;
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: process.env.USER_EMAIL,
-      pass: process.env.USER_PASS,
-    },
-  });
-  const mailobject = {
-    from: email,
-    to: process.env.USER_EMAIL,
-    subject: Subject,
-    text:
-      "Message from " +
-      fname +
-      " " +
-      lname +
-      "(" +
-      email +
-      ")" +
-      " :\n\n" +
-      message +
-      " ",
-  };
   const success = {
     headText: "Message Transmitted Successfully!",
     subText:
@@ -101,7 +78,30 @@ app.post("/send", async (req, res) => {
     route: "/contact#contact-form"
   };
   try {
-    await transporter.sendMail(mailobject);
+    if (!process.env.RESEND_API_KEY || !process.env.USER_EMAIL) {
+      throw new Error("Missing RESEND_API_KEY or USER_EMAIL environment variable.");
+    }
+
+    const response = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from: "Portfolio Contact <onboarding@resend.dev>",
+        to: [process.env.USER_EMAIL],
+        reply_to: email,
+        subject: Subject,
+        text: `Message from ${fname} ${lname} (${email}):\n\n${message}`,
+      }),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Resend API error ${response.status}: ${errorText}`);
+    }
+
     res.status(200).render("status_modal.ejs", { content: success });
   } catch (error) {
     console.log(error);
